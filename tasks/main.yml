@@ -12,14 +12,14 @@
     
 - name: Activate RabbitMQ mangement plugin
   shell: rabbitmq-plugins enable rabbitmq_management
-  when: {{rabbitmq_enable_management_plugin}} == True
+  when: rabbitmq_enable_management_plugin == True
   
 - name: Create admin user
-  command: rabbitmqctl add_user {{rabbitmq_admin_username}} {{rabbitmq_admin_password}}
+  command: rabbitmqctl add_user "{{rabbitmq_admin_username}}" "{{rabbitmq_admin_password}}"
   ignore_errors: yes
 
 - name: Assign admin role to new user
-  shell: rabbitmqctl set_user_tags {{rabbitmq_admin_username}} administrator
+  shell: rabbitmqctl set_user_tags "{{rabbitmq_admin_username}}" administrator
   
 - name: Allow admin user access to all resources
-  shell: rabbitmqctl set_permissions -p / {{rabbitmq_admin_username}} ".*" ".*" ".*"
+  shell: rabbitmqctl set_permissions -p / "{{rabbitmq_admin_username}}" ".*" ".*" ".*"
