@@ -44,8 +44,3 @@ License
 -------
 
 Github The Unlicense (do whatever you want with the source)
-
-Author Information
-------------------
-
-Perhaps something clever here
