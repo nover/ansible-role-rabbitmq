@@ -1,0 +1,4 @@
+---
+rabbitmq_enable_management_plugin: True
+rabbitmq_admin_username: 'admin'
+rabbitmq_admin_password: 'admin'

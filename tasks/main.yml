@@ -1,0 +1,25 @@
+---
+- name: Ensure RabbitMQ repository is present
+  apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+
+- name: Ensure RabbitMQ apt keys are present
+  apt_key: url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+  
+- name: Install RabbitMQ
+  apt: name={{item}} state=present force=yes
+  with_items: 
+    - rabbitmq-server
+    
+- name: Activate RabbitMQ mangement plugin
+  shell: rabbitmq-plugins enable rabbitmq_management
+  when: {{rabbitmq_enable_management_plugin}} == True
+  
+- name: Create admin user
+  command: rabbitmqctl add_user {{rabbitmq_admin_username}} {{rabbitmq_admin_password}}
+  ignore_errors: yes
+
+- name: Assign admin role to new user
+  shell: rabbitmqctl set_user_tags {{rabbitmq_admin_username}} administrator
+  
+- name: Allow admin user access to all resources
+  shell: rabbitmqctl set_permissions -p / {{rabbitmq_admin_username}} ".*" ".*" ".*"
