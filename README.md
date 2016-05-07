@@ -3,7 +3,8 @@ RabbitMQ
 
 A simple role that installs RabbitMQ from RabbitMQ's repositories on Ubuntu machines.
 
-Build status https://travis-ci.org/nover/ansible-role-rabbitmq.svg?branch=master
+![Travis build status](https://travis-ci.org/nover/ansible-role-rabbitmq.svg?branch=master "Travis Build status") 
+
 Requirements
 ------------
 
