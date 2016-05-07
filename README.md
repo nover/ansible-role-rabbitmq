@@ -11,16 +11,34 @@ No requirements except a Ubuntu machine to receive RabbitMQ and ansible it self
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Per default the management plugin for rabbit mq will be enabled, and a global admin user with username "admin" and password "admin" will be created. The variables controlling this are the following:
+```yaml
+rabbitmq_enable_management_plugin: True
+rabbitmq_admin_username: 'admin'
+rabbitmq_admin_password: 'admin'
+```
+
+If you wish to change this behavior create a new local vars file, or pass in the variables as shown below.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: nover.rabbitmq, x: 42 }
+```yaml
+ - hosts: servers
+   roles:
+     - { role: nover.rabbitmq, rabbitmq_enable_management_plugin: False }
+```
+
+Or through a vars file:
+```yaml
+- hosts: servers
+  roles:
+    - { role: nover.rabbitmq}
+  vars_files:
+    - vars/rabbitmq.yml 
+```
 
 License
 -------
